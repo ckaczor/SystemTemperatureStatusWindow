@@ -21,7 +21,7 @@ namespace SystemTemperatureStatusWindow
             _floatingStatusWindow = new FloatingStatusWindow(this);
             _floatingStatusWindow.SetText(Resources.Loading);
 
-            _refreshTimer = new Timer(Settings.Default.UpdateInterval);
+            _refreshTimer = new Timer(Settings.Default.UpdateInterval) { AutoReset = false };
             _refreshTimer.Elapsed += HandleTimerElapsed;
             _refreshTimer.Start();
         }
@@ -109,7 +109,9 @@ namespace SystemTemperatureStatusWindow
 
         private void UpdateText(string text)
         {
-            _dispatcher.InvokeAsync(() => _floatingStatusWindow.SetText(text));
+            _dispatcher.Invoke(() => _floatingStatusWindow.SetText(text));
+
+            _refreshTimer.Start();
         }
 
         public string Name
