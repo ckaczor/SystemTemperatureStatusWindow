@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="795ebf78-b7c3-431f-a1be-37b4d70994a7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/SystemTemperatureService/SystemTemperatureService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SystemTemperatureService3.xsd" MetadataType="Schema" ID="1233946c-2169-4ac3-856d-25056a59ecb2" SourceId="1" SourceUrl="http://localhost/SystemTemperatureService/SystemTemperatureService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SystemTemperatureService31.xsd" MetadataType="Schema" ID="0403fb22-2d2c-4e17-959a-8935584045b3" SourceId="1" SourceUrl="http://localhost/SystemTemperatureService/SystemTemperatureService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SystemTemperatureService32.xsd" MetadataType="Schema" ID="70ca46c8-4b5f-45a3-adff-539955e393c4" SourceId="1" SourceUrl="http://localhost/SystemTemperatureService/SystemTemperatureService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SystemTemperatureService1.disco" MetadataType="Disco" ID="dc54fd62-fb43-46b7-bdac-fe641c59d96c" SourceId="1" SourceUrl="http://localhost/SystemTemperatureService/SystemTemperatureService.svc?disco" />
+    <MetadataFile FileName="SystemTemperatureService1.wsdl" MetadataType="Wsdl" ID="64a24197-0881-4c46-8431-99e53feddc90" SourceId="1" SourceUrl="http://localhost/SystemTemperatureService/SystemTemperatureService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -33,15 +33,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="FloatingStatusWindowLibrary">
-      <HintPath>..\FloatingStatusWindowLibrary\FloatingStatusWindowLibrary\bin\Debug\FloatingStatusWindowLibrary.dll</HintPath>
+      <HintPath>..\..\FloatingStatusWindowLibrary\FloatingStatusWindowLibrary\bin\Debug\FloatingStatusWindowLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -59,6 +59,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Service References\SystemTemperatureService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="WindowSource.cs" />
   </ItemGroup>
@@ -80,12 +85,24 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\SystemTemperatureService\SystemTemperatureService1.wsdl" />
+    <None Include="Service References\SystemTemperatureService\SystemTemperatureService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SystemTemperatureService\SystemTemperatureService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SystemTemperatureService\SystemTemperatureService32.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SystemTemperatureService\SystemTemperatureStatusWindow.SystemTemperatureService.Device.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -94,10 +111,25 @@
     <None Include="Resources\ApplicationIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Public\OpenHardwareMonitor\OpenHardwareMonitorLib.csproj">
-      <Project>{b0397530-545a-471d-bb74-027ae456df1a}</Project>
-      <Name>OpenHardwareMonitorLib</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SystemTemperatureService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SystemTemperatureService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SystemTemperatureService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SystemTemperatureService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SystemTemperatureService\SystemTemperatureService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
