@@ -113,6 +113,12 @@ namespace SystemTemperatureStatusWindow.SystemTemperatureService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISystemTemperatureService/GetDeviceList", ReplyAction="http://tempuri.org/ISystemTemperatureService/GetDeviceListResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<SystemTemperatureStatusWindow.SystemTemperatureService.Device>> GetDeviceListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISystemTemperatureService/Shutdown", ReplyAction="http://tempuri.org/ISystemTemperatureService/ShutdownResponse")]
+        void Shutdown();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISystemTemperatureService/Shutdown", ReplyAction="http://tempuri.org/ISystemTemperatureService/ShutdownResponse")]
+        System.Threading.Tasks.Task ShutdownAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -148,6 +154,14 @@ namespace SystemTemperatureStatusWindow.SystemTemperatureService {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<SystemTemperatureStatusWindow.SystemTemperatureService.Device>> GetDeviceListAsync() {
             return base.Channel.GetDeviceListAsync();
+        }
+        
+        public void Shutdown() {
+            base.Channel.Shutdown();
+        }
+        
+        public System.Threading.Tasks.Task ShutdownAsync() {
+            return base.Channel.ShutdownAsync();
         }
     }
 }

@@ -8,5 +8,8 @@ namespace SystemTemperatureService
     {
         [OperationContract]
         List<Device> GetDeviceList();
+
+        [OperationContract]
+        void Shutdown();
     }
 }

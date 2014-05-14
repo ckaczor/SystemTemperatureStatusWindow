@@ -1,6 +1,7 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace SystemTemperatureService
 {
@@ -55,6 +56,11 @@ namespace SystemTemperatureService
             }
 
             return deviceList;
+        }
+
+        public void Shutdown()
+        {
+            Program.MainDispatcher.Invoke(Application.Current.Shutdown);
         }
     }
 }

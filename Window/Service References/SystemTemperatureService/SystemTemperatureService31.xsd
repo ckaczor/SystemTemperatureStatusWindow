@@ -13,4 +13,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Shutdown">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShutdownResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

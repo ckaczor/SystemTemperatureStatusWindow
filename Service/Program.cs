@@ -1,17 +1,28 @@
-﻿using Common.Debug;
+﻿using System.ServiceModel;
+using Common.Debug;
+using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.ServiceProcess;
-using SystemTemperatureService.Framework;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace SystemTemperatureService
 {
-    class Program
+    public class Program
     {
+        private const string ScheduledTaskName = "SystemTemperatureService";
+
+        public static Dispatcher MainDispatcher { get; set; }
+
+        private static ServiceHost _serviceHost;
+
         static void Main(string[] args)
         {
+            MainDispatcher = Dispatcher.CurrentDispatcher;
+
             Tracer.Initialize(null, null, Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture), Environment.UserInteractive);
 
             if (args.Contains("-install", StringComparer.InvariantCultureIgnoreCase))
@@ -20,11 +31,28 @@ namespace SystemTemperatureService
 
                 try
                 {
-                    WindowsServiceInstaller.RuntimeInstall<ServiceImplementation>();
+                    using (var taskService = new TaskService())
+                    {
+                        var existingTask = taskService.FindTask(ScheduledTaskName);
+
+                        if (existingTask == null)
+                        {
+                            var taskDefinition = taskService.NewTask();
+                            taskDefinition.Principal.RunLevel = TaskRunLevel.Highest;
+
+                            taskDefinition.Triggers.Add(new LogonTrigger());
+                            taskDefinition.Actions.Add(new ExecAction(Assembly.GetExecutingAssembly().Location));
+
+                            taskService.RootFolder.RegisterTaskDefinition(ScheduledTaskName, taskDefinition);
+                        }
+
+                        existingTask = taskService.FindTask(ScheduledTaskName);
+                        existingTask.Run();
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Tracer.WriteException("Service install", exception);
+                    Tracer.WriteException("Install", exception);
                 }
 
                 Tracer.WriteLine("Install complete");
@@ -35,27 +63,30 @@ namespace SystemTemperatureService
 
                 try
                 {
-                    WindowsServiceInstaller.RuntimeUnInstall<ServiceImplementation>();
+                    using (var taskService = new TaskService())
+                        taskService.RootFolder.DeleteTask(ScheduledTaskName, false);
                 }
                 catch (Exception exception)
                 {
-                    Tracer.WriteException("Service uninstall", exception);
+                    Tracer.WriteException("Uninstall", exception);
                 }
 
                 Tracer.WriteLine("Uninstall complete");
             }
             else
             {
-                Tracer.WriteLine("Starting service");
+                Tracer.WriteLine("Starting");
 
-                var implementation = new ServiceImplementation();
+                using (_serviceHost = new ServiceHost(typeof(SystemTemperatureService)))
+                {
+                    _serviceHost.Open();
 
-                if (Environment.UserInteractive)
-                    ConsoleHarness.Run(args, implementation);
-                else
-                    ServiceBase.Run(new WindowsServiceHarness(implementation));
+                    var application = new Application();
+                    application.Run();
+
+                    _serviceHost.Close();
+                }
             }
-
         }
     }
 }
