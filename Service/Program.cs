@@ -42,6 +42,10 @@ namespace SystemTemperatureService
 
                             taskDefinition.Triggers.Add(new LogonTrigger());
                             taskDefinition.Actions.Add(new ExecAction(Assembly.GetExecutingAssembly().Location));
+                            taskDefinition.Settings.RestartInterval = TimeSpan.FromMinutes(1);
+                            taskDefinition.Settings.RestartCount = 3;
+                            taskDefinition.Settings.StartWhenAvailable = true;
+                            taskDefinition.Settings.ExecutionTimeLimit = TimeSpan.Zero;
 
                             taskService.RootFolder.RegisterTaskDefinition(ScheduledTaskName, taskDefinition);
                         }
@@ -87,6 +91,8 @@ namespace SystemTemperatureService
                     _serviceHost.Close();
                 }
             }
+
+            Tracer.Dispose();
         }
     }
 }
