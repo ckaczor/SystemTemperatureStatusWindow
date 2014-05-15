@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.IO;
+using System.ServiceModel;
 using Common.Debug;
 using Microsoft.Win32.TaskScheduler;
 using System;
@@ -23,7 +24,13 @@ namespace SystemTemperatureService
         {
             MainDispatcher = Dispatcher.CurrentDispatcher;
 
-            Tracer.Initialize(null, null, Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture), Environment.UserInteractive);
+            var assembly = Assembly.GetExecutingAssembly();
+
+            var path = Path.GetDirectoryName(assembly.Location);
+
+            var logPath = path == null ? null : Path.Combine(path, "Logs");
+
+            Tracer.Initialize(logPath, ScheduledTaskName, Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture), Environment.UserInteractive);
 
             if (args.Contains("-install", StringComparer.InvariantCultureIgnoreCase))
             {
@@ -40,8 +47,8 @@ namespace SystemTemperatureService
                             var taskDefinition = taskService.NewTask();
                             taskDefinition.Principal.RunLevel = TaskRunLevel.Highest;
 
-                            taskDefinition.Triggers.Add(new LogonTrigger());
-                            taskDefinition.Actions.Add(new ExecAction(Assembly.GetExecutingAssembly().Location));
+                            taskDefinition.Triggers.Add(new LogonTrigger { Delay = TimeSpan.FromSeconds(30) });
+                            taskDefinition.Actions.Add(new ExecAction(assembly.Location));
                             taskDefinition.Settings.RestartInterval = TimeSpan.FromMinutes(1);
                             taskDefinition.Settings.RestartCount = 3;
                             taskDefinition.Settings.StartWhenAvailable = true;
@@ -81,18 +88,32 @@ namespace SystemTemperatureService
             {
                 Tracer.WriteLine("Starting");
 
-                using (_serviceHost = new ServiceHost(typeof(SystemTemperatureService)))
+                try
                 {
-                    _serviceHost.Open();
+                    using (_serviceHost = new ServiceHost(typeof(SystemTemperatureService)))
+                    {
+                        _serviceHost.Open();
 
-                    var application = new Application();
-                    application.Run();
+                        var application = new Application();
+                        application.DispatcherUnhandledException += HandleApplicationDispatcherUnhandledException;
+                        application.Run();
 
-                    _serviceHost.Close();
+                        _serviceHost.Close();
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Tracer.WriteException(exception);
                 }
             }
 
+            Tracer.WriteLine("Closing");
             Tracer.Dispose();
+        }
+
+        private static void HandleApplicationDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            Tracer.WriteException(e.Exception);
         }
     }
 }
