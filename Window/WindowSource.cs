@@ -28,6 +28,11 @@ namespace SystemTemperatureStatusWindow
 
         private void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
+            Update();
+        }
+
+        private void Update()
+        {
             try
             {
                 using (var client = new SystemTemperatureServiceClient())
@@ -114,22 +119,25 @@ namespace SystemTemperatureStatusWindow
             _refreshTimer.Start();
         }
 
-        public string Name
+        public string Name => "System Temperature";
+
+        public System.Drawing.Icon Icon => Resources.ApplicationIcon;
+
+        public void ShowSettings()
         {
-            get { return "System Temperature"; }
         }
 
-        public System.Drawing.Icon Icon
+        public void Refresh()
         {
-            get { return Resources.ApplicationIcon; }
+            Update();
         }
+
+        public bool HasSettingsMenu => false;
+        public bool HasRefreshMenu => true;
 
         public string WindowSettings
         {
-            get
-            {
-                return Settings.Default.WindowSettings;
-            }
+            get => Settings.Default.WindowSettings;
             set
             {
                 Settings.Default.WindowSettings = value;
