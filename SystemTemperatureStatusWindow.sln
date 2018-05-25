@@ -14,8 +14,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{DB32E0C0-3FEF-41DD-A898-016972B75CAF}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
 		LICENSE.md = LICENSE.md
 		README.md = README.md
+		SystemTemperatureStatusWindow.nuspec = SystemTemperatureStatusWindow.nuspec
 	EndProjectSection
 EndProject
 Global
