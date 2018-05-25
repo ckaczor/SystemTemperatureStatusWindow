@@ -142,4 +142,52 @@
   <data name="SuffixF" xml:space="preserve">
     <value>°F</value>
   </data>
+  <data name="CheckingForUpdate" xml:space="preserve">
+    <value>Checking for update...</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>_Check for Update</value>
+  </data>
+  <data name="DownloadingUpdate" xml:space="preserve">
+    <value>Downloading update...</value>
+  </data>
+  <data name="NoUpdate" xml:space="preserve">
+    <value>No update found</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating application...</value>
+  </data>
+  <data name="RestartingAfterUpdate" xml:space="preserve">
+    <value>Restarting application...</value>
+  </data>
+  <data name="InstallingUpdate" xml:space="preserve">
+    <value>Installing update...</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>System Temperature Status Window</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>_Start when Windows starts</value>
+  </data>
+  <data name="OptionCategory_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="OptionCategory_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version: {0}</value>
+  </data>
+  <data name="OptionsWindow_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="OptionsWindow_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ApplicationIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OptionsWindow_OkayButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OptionsWindow_Title" xml:space="preserve">
+    <value>Options</value>
+  </data>
 </root>

@@ -4,6 +4,3 @@
 [submodule "Service/openhardwaremonitor"]
 	path = Service/openhardwaremonitor
 	url = https://github.com/openhardwaremonitor/openhardwaremonitor.git
-[submodule "Window/FloatingStatusWindow"]
-	path = Window/FloatingStatusWindow
-	url = https://github.com/ckaczor/FloatingStatusWindow.git

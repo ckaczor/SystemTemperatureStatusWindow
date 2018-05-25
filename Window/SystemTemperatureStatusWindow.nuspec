@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SystemTemperatureStatusWindow</id>
+    <title>System Temperature Status Window</title>
+    <version>$version$</version>
+    <authors>Chris Kaczor</authors>
+    <description>A "floating" status window that shows CPU, GPU, and HDD temperature.</description>
+    <projectUrl>https://github.com/ckaczor/SystemTemperatureStatusWindow</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/ckaczor/SystemTemperatureStatusWindow/master/LICENSE.md</licenseUrl>
+    <tags>cpu</tags>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\**\*" target="lib\net45" exclude="*.pdb;*.nupkg;*.vshost.*" />
+  </files>
+</package>
