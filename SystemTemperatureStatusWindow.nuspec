@@ -11,6 +11,7 @@
     <tags>cpu</tags>
   </metadata>
   <files>
-    <file src="bin\$configuration$\**\*" target="lib\net45" exclude="*.pdb;*.nupkg;*.vshost.*" />
+    <file src="Window\bin\$configuration$\**\*" target="lib\net45\Window" exclude="*.pdb;*.nupkg;*.vshost.*" />
+    <file src="Service\bin\$configuration$\**\*" target="lib\net45\Service" exclude="*.pdb;*.nupkg;*.vshost.*" />
   </files>
 </package>
