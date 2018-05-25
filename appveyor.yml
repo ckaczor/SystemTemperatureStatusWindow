@@ -18,7 +18,7 @@ after_build:
 
     $squirrel = ".\packages\squirrel.windows.*\tools\Squirrel.exe"
 
-    .$squirrel -releasify ".\Window\bin\$env:CONFIGURATION\SystemTemperatureStatusWindow.$env:APPVEYOR_BUILD_VERSION.nupkg" | Write-Output
+    .$squirrel -releasify ".\bin\$env:CONFIGURATION\SystemTemperatureStatusWindow.$env:APPVEYOR_BUILD_VERSION.nupkg" | Write-Output
 artifacts:
 - path: Releases\*
   name: Releases
