@@ -45,7 +45,7 @@ namespace SystemTemperatureStatusWindow
 
                         if (path != null)
                         {
-                            var fileName = Path.Combine(path, "SystemTemperatureService.exe");
+                            var fileName = Path.Combine(path, "Service", "SystemTemperatureService.exe");
 
                             Process.Start(fileName, "-install");
                         }
