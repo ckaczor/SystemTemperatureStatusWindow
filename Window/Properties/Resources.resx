@@ -190,4 +190,10 @@
   <data name="OptionsWindow_Title" xml:space="preserve">
     <value>Options</value>
   </data>
+  <data name="ServiceNotInstalled" xml:space="preserve">
+    <value>Service not installed - please restart application</value>
+  </data>
+  <data name="ServiceNotStarted" xml:space="preserve">
+    <value>Waiting for service to start...</value>
+  </data>
 </root>

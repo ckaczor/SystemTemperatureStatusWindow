@@ -1,4 +1,5 @@
-﻿using FloatingStatusWindowLibrary;
+﻿using Common.Wpf.Windows;
+using FloatingStatusWindowLibrary;
 using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,6 @@ using System.Windows.Threading;
 using SystemTemperatureStatusWindow.Options;
 using SystemTemperatureStatusWindow.Properties;
 using SystemTemperatureStatusWindow.SystemTemperatureService;
-using Common.Wpf.Windows;
-using Task = Microsoft.Win32.TaskScheduler.Task;
 
 namespace SystemTemperatureStatusWindow
 {
@@ -63,7 +62,6 @@ namespace SystemTemperatureStatusWindow
             _refreshTimer = new Timer(Settings.Default.UpdateInterval) { AutoReset = false };
             _refreshTimer.Elapsed += HandleTimerElapsed;
 
-
             System.Threading.Tasks.Task.Factory.StartNew(UpdateApp).ContinueWith(task => StartUpdate(task.Result.Result));
         }
 
@@ -97,6 +95,23 @@ namespace SystemTemperatureStatusWindow
         {
             try
             {
+                using (var taskService = new TaskService())
+                {
+                    var existingTask = taskService.FindTask(ScheduledTaskName);
+
+                    if (existingTask == null)
+                    {
+                        UpdateText(Resources.ServiceNotInstalled);
+                        return;
+                    }
+
+                    if (existingTask.State != TaskState.Running)
+                    {
+                        UpdateText(Resources.ServiceNotStarted);
+                        return;
+                    }
+                }
+
                 using (var client = new SystemTemperatureServiceClient())
                 {
                     var builder = new StringBuilder();

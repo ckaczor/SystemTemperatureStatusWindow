@@ -243,6 +243,24 @@ namespace SystemTemperatureStatusWindow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Service not installed - please restart application.
+        /// </summary>
+        public static string ServiceNotInstalled {
+            get {
+                return ResourceManager.GetString("ServiceNotInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for service to start....
+        /// </summary>
+        public static string ServiceNotStarted {
+            get {
+                return ResourceManager.GetString("ServiceNotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Start when Windows starts.
         /// </summary>
         public static string StartWithWindows {
