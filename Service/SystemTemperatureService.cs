@@ -60,6 +60,8 @@ namespace SystemTemperatureService
 
         public void Shutdown()
         {
+            _computer.Close();
+
             Program.MainDispatcher.Invoke(Application.Current.Shutdown);
         }
     }
